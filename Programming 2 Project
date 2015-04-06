@@ -1,0 +1,691 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>
+int i;
+struct Info Pat[20];//declaration of structure variable
+struct DocInfo Doct[10];
+//==================================//
+//=   DECLARATION OF STRUCTURES    =//
+//==================================//
+
+struct Info
+{
+	char FName[20];
+	char LName[20];
+	char DOB[20];
+	int Id;
+	char Num[20];
+	char Address[30];
+	char Ltreat[20];
+	char Ldate[20];
+	char All[20];
+	
+			
+};
+
+struct DocInfo
+{
+	char fnam[10];
+	char lnam[10];
+	int id;
+	char occup[15];	
+};
+
+
+
+void PassFunc();
+void UpdatePat();
+void AddPat();
+void EditPat();
+void DisPat();
+void DelPat();
+void DisMenu();
+void DisplayRec();
+void DisplayRep();
+void DocRep();
+void DocIncRep();
+void HosIncRep();
+void DisplayNotifi();
+void SearchFunc();
+void DocMenu();
+void AddDoc();
+void EditDoc();
+void DisDoc();
+void Heading();
+void Transaction();
+void DisTreat();
+void  is_empty();
+/*******************
+ *   MAIN   MENU   *
+ *******************/
+main (void)
+{	
+	//DisPat();
+//Transaction(); //still not fixed
+//	PassFunc();
+	
+	
+	system ("cls");
+	int choice;
+	do{	
+
+		Heading();
+		printf("\n\n\t\t\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB\n");
+		printf("\t\t\xBA                                           \xBA\n");
+		printf("\t\t\xBA\t\t  MAIN MENU                 \xBA\n");
+		printf("\n\n\t\t\t                               \n");      
+		printf("\t\t\t 1 - DOCTORS INFORMATION\n\n\t\t\t 2 - PATIENTS IFORMAATION\n\n\t\t\t 3 - EXIT\n\n\n");
+		printf("\t\t\xBA                                           \xBA\n");
+		printf("\t\t\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC\n");
+		
+		
+		printf("Please choose from the menu above\n\n");
+		printf(">> ");
+		scanf("%d", &choice);	
+		
+		if (choice == 1)
+		{
+			DocMenu();
+		}
+			else if (choice == 2)
+				{
+					DisMenu();
+				}
+				else if (choice == 3)
+					{
+						exit(0);
+					}
+					else 
+						{
+							printf("INVALID OPTION");
+						}
+	  }while(choice > 0 && choice <= 3);
+  getch();
+  return 0;
+}
+
+//===============================//
+//=       PASSWORD FUNCTION     =//
+//===============================//
+
+void PassFunc()
+{		int pcount, p;
+		int maxi = 3;
+		char password[12];
+		char pw[]= {"BriteSmiles"};
+		do
+		{
+			printf("\t\t\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB\n");
+			printf("\t\t\xBA                                           \xBA\n");
+			printf("\t\t\xBA    WELCOME TO BRITE SMILES DENTAL CARE    \xBA\n");
+			printf("\t\t\xBA                                           \xBA\n");
+			printf("\t\t\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC\n");
+		
+			printf("\n\n\t\t....THIS SYSTEM IS PASSWORD PROTECTED....\n\n");
+			printf("You have %d tries remaining", maxi);
+	
+			printf("\n\n\n\nENTER PASSWORD:");
+			scanf("%s", &password[p]);
+			if((strcmp(password,pw)==0))
+			{
+				printf("YOU ARE SUCCESSFULLY LOGGED IN");
+			}
+			else
+			{
+				printf("\nINCORRCT PASSWORD PLEASE TRY AGAIN!");
+			}
+			pcount++;
+			maxi - 1;
+			system("cls");
+		}while(pcount < maxi);
+		printf("\n\n\n\n\n\t\t\tYOU HAVE EXCEEDED THE PASSWORD LIMIT\n\n");
+		printf("\n\n\n\t\t\tYOU HAVE BEEN BLOCKED FROM THE SYSTEM\n\n\n\n");
+		exit(0);
+getch();
+}
+//==================================//
+//=   DISPLAY MAIN MENU FUNCTION   =//
+//==================================//
+
+void DisMenu()
+{
+	system("cls");
+	Heading();	
+	int menuopt;
+	do{
+		printf("\n\t\t\t\t MENU OPTION\n\n");
+		printf("\t\t\t1. Update Patient Record\n");
+		printf("\t\t\t2. Display Receipt\n");
+		printf("\t\t\t3. Display Reports\n");
+		printf("\t\t\t4. Display Notification\n");
+		printf("\t\t\t5. Go to Record Choice\n");
+		printf("\t\t\t6. Exit Menu\n\n");
+			
+		printf("\nPLEASE CHOOSE FROM THE MENU OPTION ABOVE:\n");
+		printf(">> ");
+		scanf("%d", &menuopt);	 	
+		switch (menuopt)
+		{	
+			case 1:
+			UpdatePat();
+			break;
+			case 2:
+			DisplayRec();
+			break;
+			case 3:
+			DisplayRep();
+			break;
+			case 4:
+			DisplayNotifi();
+			break;
+			case 5:
+			DocMenu();
+			break;
+			case 6:
+			exit(0);							//exit function
+			break;
+			default:
+				printf("Invalid Option");
+			break;
+		}
+	}while(menuopt > 0 && menuopt<=6);
+}
+
+//===============================//
+//=   UPDATE PATIENT FUNCTION   =//
+//===============================//
+void UpdatePat()
+{
+	int updopt;
+	do{	
+		system("cls");
+		Heading();
+		printf("\n\n\t\t\t\tUPDATE PATIENT MENU\n\n");
+		printf("\t\t\t1. Add Patient\n");
+		printf("\t\t\t2. Edit Patient Record\n");
+		printf("\t\t\t3. Display Patient Information\n");
+		printf("\t\t\t4. Delete Patient Record\n");
+		printf("\t\t\t5. Return to Menu Option\n");
+		printf("\t\t\t6. Exit System\n");
+			
+		printf("\n\nPLEASE CHOOSE FROM THE MENU OPTION ABOVE:\n");
+		printf(">> ");
+		scanf("%d", &updopt);	 	
+		switch (updopt)
+		{	
+			case 1:
+				AddPat();
+			break;
+			case 2:
+				EditPat();
+			break;
+			case 3:
+				DisPat();
+			break;
+			case 4:
+				DelPat();
+			break;
+			case 5:
+				DisMenu();
+			break;
+			case 6:
+				exit(0);
+			break;
+			default:
+				printf("Invalid Option");
+			break;
+		}
+	}while(updopt > 0 && updopt<=6);		
+}
+
+//============================//
+//=   ADD PATIENT FUNCTION   =//
+//============================//
+void AddPat()
+{	
+	system("cls");
+	Heading();
+	int patcount = 0;
+	
+	system("cls");
+	Heading();
+	
+	for (i = 0; i < 5; i++)
+		{
+			printf("\n\nEnter patient's First Name\n\n");
+			printf(">> ");
+			scanf("%s", Pat[i].FName);
+			printf("Enter patient's Last Name\n\n");
+			printf(">> ");
+			scanf("%s", Pat[i].LName);
+			printf("Enter patient's Date of Birth\n\n");
+			printf(">> ");
+			scanf("%s", Pat[i].DOB);
+			printf("Enter patient's phone number (000-000-0000)\n\n");
+			printf(">> ");
+			scanf("%d", Pat[i].Num);
+			printf("Enter patient's address\n\n");
+			printf(">> ");
+			scanf("%s", Pat[i].Address);
+			printf("Enter patient's last treatment\n\n");
+			printf(">> ");
+			scanf("%s", Pat[i].Ltreat);
+			printf("Enter patient's last appointment date\n\n");
+			printf(">> ");
+			scanf("%s", Pat[i].Ldate);
+			printf("Enter patient's allergies\n\n");
+			printf(">> ");
+			scanf("%s", Pat[i].All);
+			system("cls");
+			//Pat.Id = Pat.Id + 1;
+			patcount = patcount + 1;
+			
+		//	visit = curdate - patLdate
+		}
+			
+			system("cls");
+			printf("\n\n\n\t\t\tTHE PATIENT'S INFORMATION WAS SAVED TO THE SYSTEMS DATABASE");
+			DisMenu();
+} 
+
+//============================//
+//=   EDIT PATIENT FUNCTION  =//
+//============================//
+
+void EditPat()
+{
+	
+}
+
+//================================//
+//=   DISPLAY PATIENT FUNCTION   =//
+//================================//
+
+void DisPat()
+{	
+	system("cls");
+	Heading();
+	int id, count, found = 0, pos;
+	is_empty();
+	printf("\n\n\nEnter patient's registration number to view patient record: ");
+	scanf("%d", &id);
+	system("cls");		
+	for(count = 0; count < i + 1; i++) // loops the block until condition is false
+ 	{
+ 		if(Pat[count].Id == id) // checks to see if Pat.Id equals id
+  		{  
+    		printf("\n\n\n\t\t\tSEARCH HAS BEEN SUCESSFUL\n");
+    		found = 1;
+		 	pos = count;
+   			 getch();           
+   		 }
+	}
+	if (found == 1)
+	{
+		system("cls");
+		printf("PATIENT RECORD\n\n");
+		printf("PATINT NAME: %s%s\n", Pat[pos].FName, Pat[pos].LName);
+		printf("REG#: %s\n", Pat[pos].Id);
+		printf("D.O.B: %s\n", Pat[pos].DOB);
+		printf("TELEPHONE: %s\n", Pat[pos].Num);
+		printf("ADDRESS: %s\n", Pat[pos].Address);
+		printf("LAST TREATMENT: %s\n", Pat[pos].Ltreat);
+		printf("LAST APPIONTMENT DATE: %s\n", Pat[pos].Ldate);
+		printf("ALLERGIES: %s\n", Pat[pos].All);
+	}
+	else if(found == 0)
+	{
+		printf("\n\n\n\t\t\tRECORD CANNOT BE FOUND\n");     
+	}
+	 getch();
+	 UpdatePat();		
+}
+
+//================================//
+//=   DELETE PATIENT FUNCTION    =//
+//================================//
+
+void DelPat()
+{
+	
+}
+
+//================================================//
+//=          DISPLAY RECEIPT FUNCTION            =//
+//================================================//
+void DisplayRec()
+{
+	
+}
+
+//===========================================//
+//=          DISPLAY REPORT FUNCTION        =//
+//===========================================//
+void DisplayRep()
+{	
+	system("cls");
+	Heading();
+	int repopt;
+	do{
+		printf("\n\n\t\t\t\tREPORTS\n\n");
+		printf("\t\t\t1. Doctor's Report\n");
+		printf("\t\t\t2. Doctor's Income Report\n");
+		printf("\t\t\t3. Hospital's Income Report\n");
+		printf("\t\t\t4. Return to main menu\n\n");
+		
+		printf("\n\nCHOOSE AN OPTION FROM THE LIST OF REPORT ABOVE:\n");
+		printf(">> ");
+		scanf("%d", &repopt);
+		switch(repopt)
+		{
+			case 1:
+				DocRep();
+			break;
+			case 2:
+				DocIncRep();
+			break;
+			case 3:
+				HosIncRep();
+			break;
+			case 4:
+				DisMenu();
+			break;
+			default:
+				printf("Invalid Option");
+			break;
+		}
+	  }while(repopt > 0 && repopt <5);
+}
+
+//===============================================//
+//=           DISPLAY REPORT FUNCTION           =//
+//===============================================//
+
+void DocRep()
+{
+	
+}
+
+//==============================================//
+//=   DISPLAY DOCTOR'S INCOME REPORT FUNCTION  =//
+//==============================================//
+
+ 
+void DocIncRep()
+{
+	
+}
+
+//==================================================//
+//=   DISPLAY HOSPITAL'S INCOME REPORT FUNCTION    =//
+//==================================================//
+
+void HosIncRep()
+{
+	
+}
+
+//=====================================//
+//=   DISPLAY NOTIFICATION FUNCTION   =//
+//=====================================//
+
+void DisplayNotifi()
+{
+	
+}
+
+//===============================//
+//=       SEARCH FUNCTION       =//
+//===============================//
+
+ void SearchFunc()
+ {
+ 	
+ }
+ 
+
+//==================================//
+//=        DOCTORS FUNCTION        =//
+//==================================//
+void DocMenu()
+{
+	system("cls");
+	Heading();
+	int docopt;
+	
+	printf("\n\n\t\t\t\tUPDATE DOCTORS MENU\n\n");
+	printf("\t\t\t1. Add Doctor\n");
+	printf("\t\t\t2. Edit Doctor's Profile\n");
+	printf("\t\t\t3. Display Doctor's Information\n");
+	printf("\t\t\t4. Exit System\n");
+	printf("\n\nCHOOSE AN OPTION FROM THE LIST OF REPORT ABOVE:\n");
+	printf(">> ");
+	scanf("%d", &docopt);
+	do
+	{
+		switch (docopt)
+		{	
+			case 1:
+				AddDoc();
+			break;
+			case 2:
+				EditDoc();
+			break;
+			case 3:
+				DisDoc();
+			break;
+			case 4:
+				exit(0);
+			break;
+			default:
+				printf("Invalid Option");
+			break;
+		}	
+		
+	}while(docopt <5);
+	
+}
+void AddDoc()
+{
+	system("cls");
+	Heading();
+	int d; 
+	printf("\n\nEnter doctor's First Name\n\n");
+	printf(">> ");
+	scanf("%s", Doct[d].fnam);
+	printf("Enter doctor's Last Name\n\n");
+	printf(">> ");
+	scanf("%s", Doct[d].lnam);
+	printf("Enter doctor's Identification Number\n\n");
+	printf(">> ");
+	scanf("%d", Doct[d].id);
+	printf("Enter doctor's Occupation\n\n");
+	printf(">> ");
+	scanf("%s", Doct[d].occup);
+}
+
+//================================//
+//=     EDIT DOCTORS FUNCTION    =//
+//================================//
+
+void EditDoc()
+{
+	system("cls");
+	Heading();		
+}
+
+//================================//
+//=   DISPLAY DOCTORS FUNCTION   =//
+//================================//
+
+void DisDoc()
+{
+	system("cls");
+	Heading();	
+}
+
+//================================//
+//=   DISPLAY HEADING FUNCTION   =//
+//================================//
+
+void Heading()
+{
+		printf("\t\t\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB\n");
+		printf("\t\t\xBA                                           \xBA\n");
+		printf("\t\t\xBA          BRITE SMILES DENTAL CARE         \xBA\n");
+		printf("\t\t\xBA                                           \xBA\n");
+		printf("\t\t\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC\n");
+}
+
+//========================================//
+//=   CALCULATING TRANSACTION FUNCTION   =//
+//========================================//
+
+void Transaction()
+{	
+	system("cls");
+	Heading();
+	int treatopt;
+	float T_Cost[] ={4500, 50000, 180000, 80000, 7500, 6000, 10000, 300000};
+	char payopt;
+	float patch, cardch, cashch, surg, dent, orth;
+	printf("\n\nHow would you like to pay?\n");
+	printf("\n\t\tA. CARD\t\tB. CASH");
+	payopt = getch();
+			switch (payopt)
+			{	
+				case 'A':
+				case 'a':
+				DisTreat();	
+				printf("\n\nCHOOSE FROM THE MENU ABOVE\n");
+				printf(">> ");
+				scanf("%d", &treatopt);
+			//	while (patch < 15000)
+			//	{
+				do
+				{
+					switch(treatopt)
+					{
+						case 1:
+							patch = T_Cost[0] + T_Cost[1];
+							cardch = 0.80 * patch;
+							cashch = 0.20 * patch;
+							surg = 0;
+							printf("%f", patch);//, cardch, cashch);
+						break;
+						case 2:
+							patch = T_Cost[0] + T_Cost[2];
+							cardch = 0.80 * patch;
+							cashch = 0.20 * patch;
+						break;
+						case 3:
+							patch = T_Cost[0] + T_Cost[3];
+							cardch = 0.80 * patch;
+							cashch = 0.20 * patch;
+						break;
+						case 4:
+							patch = T_Cost[0] + T_Cost[4];
+							cardch = 0.80 * patch;
+							cashch = 0.20 * patch;
+						break;
+						case 5:
+							patch = T_Cost[0] + T_Cost[5];
+							cardch = 0.80 * patch;
+							cashch = 0.20 * patch;
+						break;
+						case 6:
+							patch = T_Cost[0] + T_Cost[6];
+							cardch = 0.80 * patch;
+							cashch = 0.20 * patch;
+						break;
+						case 7:
+							patch = T_Cost[0] + T_Cost[7];
+							cardch = 0.80 * patch;
+							cashch = 0.20 * patch;
+						break;
+						default:
+							printf("Invalid Option");
+						break;
+					}
+				}while(treatopt > 0 && treatopt < 8);
+			
+				break;
+				case 'B':
+				case 'b':
+					DisTreat();	
+					printf("\n\nCHOOSE FROM THE MENU ABOVE\n");
+					printf(">> ");
+					scanf("%d", &treatopt);
+					do
+					{
+						switch(treatopt)
+						{
+							case 1:
+								patch = T_Cost[0] + T_Cost[1];
+							break;
+							case 2:
+								patch = T_Cost[0] + T_Cost[2];
+							break;
+							case 3:
+								patch = T_Cost[0] + T_Cost[3];
+							break;
+							case 4:
+								patch = T_Cost[0] + T_Cost[4];
+							break;
+							case 5:
+								patch = T_Cost[0] + T_Cost[5];
+							break;
+							case 6:
+								patch = T_Cost[0] + T_Cost[6];
+							break;
+							case 7:
+								patch = T_Cost[0] + T_Cost[7];
+							break;
+							default:
+								printf("Invalid Option");
+							break;
+						}
+					}while(treatopt > 0 && treatopt < 8);
+					getch();
+					break;
+					default:
+						printf("Invalid Option");
+					break;
+				}
+}	
+
+//=========================================//
+//=   DISPLAY TREATMENT & COST FUNCTION   =//
+//=========================================//
+
+void DisTreat()
+{	
+	system("cls");
+	Heading();	
+	printf("\n\n\t\t\tTREATMENT OPTIONS AND COST\n\n");
+	printf("\nExamination Fee - $4, 500\n\n");
+	printf("________________________________________________________________________________");
+	printf("\n\tDENTAL SURGEON\t\t\tDENTIST\t\t\tORTHODONTIST\n");
+	printf("________________________________________________________________________________");
+	printf("\n1. Root Canals - $50, 000\t4. Extraction - $7, 500\t  7. Braces - $300, 000\n");
+	printf("\n2. Dental Implants - $180, 000\t5. Cleaning - $6000 \n");
+	printf("\n3. Crowning - $80, 000\t\t6. Filling - $10, 000\n");
+	getch();
+}
+
+//====================================//
+//=   CHECKKING EXISTENCE FUNCTION   =//
+//====================================//
+
+void  is_empty()
+{
+   if (i == -1)
+   {
+	  	printf("\t\tNO RECORD HAS BEEN ADDED\n");
+		getch();
+   		system("cls");
+   		UpdatePat();
+	}
+}
